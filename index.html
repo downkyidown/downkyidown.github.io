@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>哔哩下载姬 DownKyi 下载｜B站视频批量下载工具（Windows/Mac/Linux）夸克网盘</title>
+<meta name="description" content="哔哩下载姬（DownKyi）是开源免费的哔哩哔哩视频下载工具，支持批量下载、8K/HDR/杜比视界、二维码登录、弹幕与封面下载、音视频提取和去水印。提供 Windows、macOS、Linux 安装包夸克网盘下载。">
+<meta name="keywords" content="哔哩下载姬,DownKyi,downkyi下载,B站视频下载,哔哩哔哩下载工具,B站批量下载,B站8K下载,downkyi夸克网盘,downkyi Mac,downkyi Windows">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://downkyidown.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="哔哩下载姬下载站">
+<meta property="og:title" content="哔哩下载姬 DownKyi 下载｜B站视频批量下载工具">
+<meta property="og:description" content="开源免费，支持批量下载、8K/HDR/杜比视界、弹幕与封面下载。Windows / macOS / Linux 安装包夸克网盘下载。">
+<meta property="og:url" content="https://downkyidown.github.io/">
+<meta name="theme-color" content="#0b3b4f">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "哔哩下载姬",
+  "alternateName": ["DownKyi", "downkyi"],
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "description": "简单易用的哔哩哔哩视频下载工具，支持批量下载、8K/HDR/杜比视界，使用 Aria2 多线程下载并通过 FFmpeg 混流，提供音视频提取、去水印等工具箱。",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "url": "https://downkyidown.github.io/",
+  "sameAs": ["https://github.com/leiurayer/downkyi", "https://github.com/yaobiao131/downkyicore"],
+  "downloadUrl": "https://pan.quark.cn/s/b50080bd1ef8",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
+  "dateModified": "2026-10-15"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"哔哩下载姬是什么软件？","acceptedAnswer":{"@type":"Answer","text":"哔哩下载姬（DownKyi）是一款简单易用的哔哩哔哩视频下载工具，可输出 mp4 文件，采用 Aria 多线程下载，并用 FFmpeg 进行混流和音视频提取。"}},
+    {"@type":"Question","name":"哔哩下载姬免费吗？","acceptedAnswer":{"@type":"Answer","text":"免费且开源，基于 GPL-3.0 协议，仅供学习交流使用。"}},
+    {"@type":"Question","name":"哔哩下载姬支持 Mac 和 Linux 吗？","acceptedAnswer":{"@type":"Answer","text":"原版为 Windows 程序，需要 .NET Framework 4.7.2 及以上。基于 AvaloniaUI 的跨平台版本 downkyicore 支持 Windows、macOS 和 Linux，并自带运行环境。"}},
+    {"@type":"Question","name":"下载卡在“混流中”怎么办？","acceptedAnswer":{"@type":"Answer","text":"检查 ffmpeg.exe 是否可以正常工作。"}},
+    {"@type":"Question","name":"Aria 下载失败怎么办？","acceptedAnswer":{"@type":"Answer","text":"检查 aria2c.exe 是否能正常运行以及是否被防火墙拦截，也可以尝试切换端口号。"}}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --ink:#0b3b4f; --ink-2:#456372; --paper:#f4f8fa; --card:#ffffff;
+  --line:#d4e2e8; --accent:#0f7fb0; --accent-d:#0a6590; --on-accent:#fff; --warn:#b4540a;
+  --shadow:0 1px 2px rgba(11,59,79,.06),0 8px 24px rgba(11,59,79,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#e3f1f7; --ink-2:#9dbccb; --paper:#0b1c25; --card:#112a36;
+    --line:#244555; --accent:#4cc2f0; --accent-d:#7ad3f5; --on-accent:#06222f; --warn:#f0a45c;
+    --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.8 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent-d)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+code{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:.92em}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:56px;overflow-x:auto;white-space:nowrap}
+.nav strong{font-size:18px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:15px}
+.nav a:hover{color:var(--accent)}
+
+.hero{padding:56px 0 40px;border-top:0}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.25;margin:0 0 16px;font-weight:800}
+.lead{font-size:18px;color:var(--ink-2);margin:0 0 20px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;padding:0;list-style:none}
+.meta li{border:1px solid var(--line);border-radius:999px;padding:2px 12px;font-size:14px;color:var(--ink-2);background:var(--card)}
+
+.dl{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+.dl h2{margin:0 0 4px;font-size:20px}
+.dl p{margin:0 0 14px;color:var(--ink-2);font-size:14px}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:700;border-radius:10px;padding:13px 16px;margin-top:10px}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--accent-d);color:var(--on-accent)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.dl small{display:block;margin-top:12px;color:var(--ink-2);font-size:13px;line-height:1.6}
+
+section{padding:36px 0;border-top:1px solid var(--line)}
+h2.sec{font-size:26px;margin:0 0 6px}
+.sub{color:var(--ink-2);margin:0 0 22px}
+h3{font-size:18px;margin:0 0 6px}
+
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.feat article{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.feat p{margin:0;color:var(--ink-2);font-size:15px}
+
+.table-scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card);border:1px solid var(--line)}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;font-size:15px}
+th{background:color-mix(in srgb,var(--accent) 10%,var(--card))}
+
+ol.steps{margin:0;padding-left:1.3em}
+ol.steps li{margin:6px 0}
+
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 2px;color:var(--ink-2)}
+
+.notice{border-left:4px solid var(--warn);background:var(--card);padding:12px 18px;border-radius:0 10px 10px 0;color:var(--ink-2);font-size:15px}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--ink-2);font-size:14px}
+
+@media (max-width:780px){
+  .hero .grid{grid-template-columns:1fr}
+  .hero{padding-top:32px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <strong>哔哩下载姬</strong>
+    <a href="#download">下载</a>
+    <a href="#features">功能</a>
+    <a href="#versions">版本选择</a>
+    <a href="#install">安装使用</a>
+    <a href="#links">支持的链接</a>
+    <a href="#faq">常见问题</a>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<section class="hero">
+  <div class="grid">
+    <div>
+      <h1>哔哩下载姬 DownKyi 下载：B站视频批量下载工具</h1>
+      <p class="lead">哔哩下载姬是一款简单易用的哔哩哔哩视频下载工具，界面简洁，操作流畅。输出 mp4 文件，用 Aria 多线程下载，FFmpeg 负责混流，还附带音视频提取、去水印等工具箱。</p>
+      <ul class="meta">
+        <li>开源 GPL-3.0</li>
+        <li>免费无广告</li>
+        <li>批量下载</li>
+        <li>8K / HDR / 杜比视界</li>
+        <li>Win / Mac / Linux</li>
+      </ul>
+      <p style="font-size:14px;color:var(--ink-2)">最近更新：2026 年 10 月 · 版本号以官方 Releases 最新版为准</p>
+    </div>
+
+    <aside class="dl" id="download" aria-label="哔哩下载姬下载">
+      <h2>夸克网盘下载</h2>
+      <p>安装包已整理到网盘，国内访问更稳定，无需额外加速即可获取。</p>
+      <a class="btn primary" href="https://pan.quark.cn/s/b50080bd1ef8" rel="nofollow noopener" target="_blank">夸克网盘下载哔哩下载姬</a>
+      <a class="btn ghost" href="https://github.com/leiurayer/downkyi/releases" rel="noopener" target="_blank">官方 GitHub Releases（Windows 版）</a>
+      <a class="btn ghost" href="https://github.com/yaobiao131/downkyicore/releases" rel="noopener" target="_blank">跨平台版 downkyicore Releases</a>
+      <small>请优先对照官方 Releases 核对版本，网盘文件仅作国内下载备份。</small>
+    </aside>
+  </div>
+</section>
+
+<section id="about">
+  <h2 class="sec">哔哩下载姬是什么</h2>
+  <p class="sub">把 B 站视频保存成通用 mp4 文件的桌面工具。</p>
+  <p>哔哩下载姬（DownKyi）可以下载几乎所有 B 站视频，并输出为 mp4。下载由 Aria 多线程完成，混流、提取音视频等操作由 FFmpeg 处理。官方定位是“视频解析”工具：本身不提供任何资源上传或存储，只解析来自 B 站的内容，并且不会对音视频做二次编码，部分视频仅会进行有限的格式转换和拼接。</p>
+  <p>原版面向 Windows，另有社区基于 AvaloniaUI 制作的跨平台版 downkyicore，让 macOS 和 Linux 用户也能使用。</p>
+</section>
+
+<section id="features">
+  <h2 class="sec">哔哩下载姬主要功能</h2>
+  <p class="sub">以下内容来自官方项目说明，具体以你下载的版本为准。</p>
+  <div class="feat">
+    <article><h3>批量下载与高画质</h3><p>支持批量下载，支持 4K，新版本说明中提到 8K、HDR、杜比视界。</p></article>
+    <article><h3>二维码登录</h3><p>扫码登录账号后，可获取账号权限范围内的清晰度。</p></article>
+    <article><h3>多种内容类型</h3><p>支持视频、番剧、剧集、电影、课程，以及用户收藏夹、订阅、稍后再看和历史记录。</p></article>
+    <article><h3>弹幕与封面</h3><p>支持弹幕下载并可设置样式，也可单独下载封面。</p></article>
+    <article><h3>断点续传</h3><p>支持 Aria2c 与断点续传，下载记录自动保存。</p></article>
+    <article><h3>工具箱</h3><p>音视频分离提取、去水印、av 与 BV 互转，以及弹幕发送者查询。</p></article>
+    <article><h3>剪贴板监听</h3><p>复制视频链接即可自动开始检索，也可在主页输入后回车。</p></article>
+    <article><h3>检查更新</h3><p>内置检查更新，下载历史可随时查看。</p></article>
+  </div>
+</section>
+
+<section id="versions">
+  <h2 class="sec">哔哩下载姬版本怎么选</h2>
+  <p class="sub">先确认你的系统，再选对应版本。</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>版本</th><th>适用系统</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>原版（Windows）</td><td>Windows，需 .NET Framework 4.7.2 及以上</td><td>也可安装 .NET Framework 4.8；压缩包内 aria2c.exe 和 ffmpeg.exe 为 32 位</td></tr>
+        <tr><td>跨平台版 downkyicore</td><td>Windows / macOS / Linux</td><td>基于 AvaloniaUI，自带 .NET6、ffmpeg、aria2 运行环境，无需自行安装</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:14px;color:var(--ink-2);font-size:15px">跨平台版默认下载路径：Windows 为软件目录下的 Media 文件夹；macOS 为 <code>~/Library/Application Support/DownKyi/Media</code>；Linux 为 <code>~/.config/DownKyi/Media</code>。</p>
+</section>
+
+<section id="install">
+  <h2 class="sec">夸克网盘下载与使用教程</h2>
+  <p class="sub">四步开始使用。</p>
+  <ol class="steps">
+    <li>点击页面上方“夸克网盘下载哔哩下载姬”，在夸克网盘打开分享页（电脑浏览器或夸克 App 均可）。</li>
+    <li>选择与你系统对应的版本，点击“保存到网盘”，再下载到本地。</li>
+    <li>解压到全英文路径，双击 <code>DownKyi.exe</code>（Windows）或打开对应系统的程序。</li>
+    <li>在 B 站复制视频链接，粘贴到主页搜索框并回车，选中视频后点击“解析”，再选择清晰度开始下载。</li>
+  </ol>
+</section>
+
+<section id="links">
+  <h2 class="sec">支持输入哪些链接</h2>
+  <p class="sub">哔哩下载姬支持从浏览器或 App 复制的多种格式。</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>类型</th><th>示例格式</th></tr></thead>
+      <tbody>
+        <tr><td>av 号</td><td><code>av170001</code> 或对应视频页链接</td></tr>
+        <tr><td>BV 号</td><td><code>BV17x411w7KC</code> 或对应视频页链接</td></tr>
+        <tr><td>番剧、电影、电视剧</td><td>ss 号、ep 号、md 号页面链接</td></tr>
+        <tr><td>课程</td><td>课程 ss 号、ep 号页面链接</td></tr>
+        <tr><td>用户空间</td><td><code>uid928123</code>、<code>UID:928123</code> 或空间页链接</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="faq">
+  <h2 class="sec">常见问题</h2>
+  <details><summary>哔哩下载姬免费吗？</summary><p>免费且开源，基于 GPL-3.0 协议，仅供学习交流使用。</p></details>
+  <details><summary>Mac 或 Linux 能用吗？</summary><p>原版是 Windows 程序。Mac 和 Linux 请使用基于 AvaloniaUI 的跨平台版 downkyicore，它自带运行环境，无需另外安装。</p></details>
+  <details><summary>Aria 下载失败怎么办？</summary><p>检查 aria2c.exe 是否能正常运行、是否被防火墙拦截，也可以尝试切换端口号。内建下载器失败时，可到官方仓库反馈。</p></details>
+  <details><summary>下载时卡在“混流中”怎么办？</summary><p>检查 ffmpeg.exe 是否能正常工作，被杀毒软件误删或拦截时需要恢复。</p></details>
+  <details><summary>去水印怎么设置？</summary><p>宽、高为水印的尺寸，X、Y 为水印在图像中的位置（以左上角为原点），这四个数值可以通过 Photoshop 等图像工具获得。</p></details>
+  <details><summary>需要 32 位还是 64 位文件？</summary><p>官方压缩包内的 aria2c.exe 和 ffmpeg.exe 为 32 位，需要 64 位时请自行替换为对应版本的文件。</p></details>
+</section>
+
+<section>
+  <div class="notice">
+    <b>使用声明：</b>本页面为非官方整理的下载与使用介绍，与哔哩下载姬项目作者无隶属关系，官方项目见 <a href="https://github.com/leiurayer/downkyi" rel="noopener" target="_blank">GitHub leiurayer/downkyi</a>。该软件只提供视频解析，不提供资源上传或存储。解析得到的内容均来自 B 站 UP 主上传，版权归原作者所有，仅可用作学习交流，未经原作者授权禁止用于其他用途，请在下载 24 小时内删除。请支持原创，前往资源的原始发布网站观看。因使用本软件产生的版权问题，软件作者概不负责。
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    哔哩下载姬下载页 · 内容依据官方项目说明整理 · <a href="#download">回到下载</a>
+  </div>
+</footer>
+
+</body>
+</html>
